@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div id="app">
+
+  <!-- Header -->
+  <header class="masthead bg-primary text-white text-center">
+    <div class="container">
+      <div class="mb-3">
+      <img class="img-fluid mb-5 d-block mx-auto" src="static/img/logo.png" alt="">
+      <h1 class="text-uppercase mb-0">[[band.title]]</h1>
+      <hr class="star-light">
+      <h2 class="font-weight-light mb-0">Datascience - Python - Vue</h2>
+    </div>
+  </header>
+  <!-- Portfolio Grid Section -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <h2 class="text-center text-uppercase text-secondary mb-0">Goal</h2>
+      <hr class="star-dark mb-5">
+      <div class="row">
+        <div class="col">
+        <h3 class="text-center">Predict the speed of the boat given <br> the angle of attack and wind speed</h3>
+        </div>
+     </div>
+   </section>
+ </div>
+
+ {% endblock %}
+
+ {% block scripts %}
+ <script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+
+ <script> 
+  var app = new Vue({
+    el:'#app',
+    delimiters: ['[[',']]'],
+    data: {
+      band:{}
+    },
+    mounted: function () {
+      this.fetchData()
+    },
+    methods: {
+      fetchData: function () {
+        this.$http.get('/test').then(response => {
+          this.band = response.body
+          console.log(this.band)
+        }, response => {
+          //error callback
+          console.log('an error occurred');
+        })
+      }
+    }
+  })
+</script>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<!-- About Section -->
+<section class="bg-primary text-white mb-0" id="about" data-target="#data-visualization">
+  <div class="container">
+    <h2 class="text-center text-uppercase text-white">Data Visualization</h2>
+    <hr class="star-light mb-5">
+    <div class="row">
+      <div class="col-lg-4 ml-auto">
+        <p class="lead">Visualization of the model output</p>
+      </div>
+      <div class="col-lg-4 mr-auto">
+        <canvas id="dummy" width="600" height="400"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
+<script>
+ var options = {
+  type: 'line',
+  data: {
+    labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    datasets: [
+    {
+      label: '# of Votes',
+      data: [12, 19, 3, 5, 2, 3],
+      borderWidth: 1
+    },  
+    {
+      label: '# of Points',
+      data: [7, 11, 5, 8, 3, 7],
+      borderWidth: 1
+    }
+    ]
+  },
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          reverse: false
+        }
+      }]
+    }
+  }
+}
+
+var draw = document.getElementById('dummy').getContext('2d');
+new Chart(draw, options);
+</script>
+{% endblock %}
